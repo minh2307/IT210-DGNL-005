@@ -4,9 +4,6 @@ import com.example.it210dgnl005.model.Spacecraft;
 import com.example.it210dgnl005.service.ISpacecraftService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.internal.util.collections.ArrayHelper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,13 +16,12 @@ import org.springframework.web.bind.annotation.*;
     @RequestMapping("/spacecraft")
 @RequiredArgsConstructor
 public class SpacecraftController {
-    @Autowired
-    private ISpacecraftService service;
+    private final ISpacecraftService service;
 
     @GetMapping
     public String list(
             @RequestParam(name = "page",defaultValue = "0") int page,
-            @RequestParam(name = "keyword", defaultValue = "false") String keyword,
+            @RequestParam(name = "keyword", required = false) String keyword,
             Model model
     ){
         Pageable pageable = PageRequest.of(page, 5);
@@ -37,7 +33,6 @@ public class SpacecraftController {
         }else {
             data = service.findAll(pageable);
         }
-
         model.addAttribute("list", data);
         return "list";
     }

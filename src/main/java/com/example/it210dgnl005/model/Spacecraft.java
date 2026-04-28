@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -34,5 +35,6 @@ public class Spacecraft {
     @Column(name = "date")
     @NotNull(message = "date không được để trống")
     @PastOrPresent(message = "date không được ở tương lai")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 }
