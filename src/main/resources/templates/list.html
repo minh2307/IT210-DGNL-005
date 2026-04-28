@@ -43,9 +43,9 @@
     </tbody>
 </table>
 
-<div>
+<div class="text-center">
     <a th:if="${list.hasPrevious()}" th:href="@{/spacecraft(page=${list.number - 1}, keyword=${keyword})}">Prev</a>
-    <a th:if="${list.hasPrevious()}" th:href="@{/spacecraft(page=${list.number + 1}, keyword=${keyword})}">Next</a>
+    <a th:if="${list.hasNext()}" th:href="@{/spacecraft(page=${list.number + 1}, keyword=${keyword})}">Next</a>
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
